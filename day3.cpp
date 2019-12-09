@@ -63,6 +63,7 @@ std::vector<Coord> followPath(std::string path) {
 
 std::vector<Coord> findIntersections(std::vector<Coord> coords1, std::vector<Coord> coords2) {
     std::vector<Coord> intersections;
+    int smallestTotalDist = INT_MAX;
 
     for (int i = 0; i < coords1.size(); i++) {
         for (int j = 0; j < coords2.size(); j++) {
@@ -74,6 +75,9 @@ std::vector<Coord> findIntersections(std::vector<Coord> coords1, std::vector<Coo
             const int y2 = c2.y;
 
             if (x1 == x2 && y1 == y2) {
+                if (i + j < smallestTotalDist && i + j != 0) {
+                    smallestTotalDist = i + j;
+                }
                 Coord nice;
                 nice.x = x1;
                 nice.y = y1;
@@ -82,6 +86,7 @@ std::vector<Coord> findIntersections(std::vector<Coord> coords1, std::vector<Coo
         }
     }
 
+    std::cout << "smallest: " << smallestTotalDist << std::endl;
     return intersections;
 }
 
@@ -121,7 +126,6 @@ int main() {
     std::vector<Coord> coords2 = followPath(path2);
     //print(coords1);
     std::vector<Coord> intersections = findIntersections(coords1, coords2);
-    print(intersections);
     int dist = getShortestDist(intersections);
     std::cout << dist << std::endl;
     //print(intersections);
