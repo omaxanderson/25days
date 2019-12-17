@@ -41,55 +41,47 @@ const computer = {
     99: halt,
 };
 
-const performOperation = (arr, idx, mode) => {
-    const funk = computer[arr[idx]];
-    return funk(arr, idx, mode);
-    /*
-    if (arr[idx] === 1) {
-        add(arr, idx);
-        return true;
-    } else if (arr[idx] === 2) {
-        multiply(arr, idx);
-        return true;
-    } else if (arr[idx] === 99) {
-        return false;
+const getModes = (num) => {
+    const modes = [];
+    while (num !== 0) {
+        modes.push(num % 10);
+        num = Math.floor(num / 10);
     }
-    return false;
-     */
+    while (modes.length < 3) {
+        modes.push(0);
+    }
+    return modes;
 };
 
-a[1] = 12;
-a[2] = 2;
+console.log(getModes(10));
+console.log(getModes(11));
+console.log(getModes(1));
+console.log(getModes(0));
+console.log(getModes(110));
+console.log(getModes(100));
+console.log(getModes(111));
+console.log(getModes(110));
 
-const mode = POSITION_MODE;
+const performOperation = (arr, idx, mode) => {
+    // first get the opt code
+    const code = arr[idx];
+    const optCode = code % 100;
+    const parameterMode = Math.floor(code / 100);
+    const modes =
 
+
+        mode = POSITION_MODE;
+    const funk = computer[arr[idx]];
+    return funk(arr, idx, mode);
+};
+
+const test1 = [1102, 4, 3, 4, 33];
+
+/*
 let i = 0;
-while (performOperation(a, i, mode)) {
+while (performOperation(a, i)) {
     i += 4;
 }
 
 console.log(a[0]);
-
-/*
-for (let i = 0; i <= 99; i++) {
-    for (let j = 0; j <= 99; j++) {
-        const arrCopy = [...a];
-        arrCopy[1] = i;
-        arrCopy[2] = j;
-        let idx = 0;
-        while (arrCopy[idx] !== 99) {
-            performOperation(arrCopy, idx);
-            idx += 4;
-        }
-
-        if (arrCopy[0] === 19690720) {
-            console.log('i', i);
-            console.log('j', j);
-            console.log(100 * i + j);
-            console.log(JSON.stringify(arrCopy));
-            break;
-        }
-        //console.log(JSON.stringify(a));
-    }
-}
  */
